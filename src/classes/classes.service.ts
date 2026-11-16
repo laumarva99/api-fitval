@@ -1,6 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+
 import { Pool } from 'pg';
 import { GymClass, GymClassRow, toGymClass } from './gym-class';
+import { CreateClassDto } from './dto/create-class.dto';
 
 // El principio de todas las consultas de clases: cada clase con el nombre de su monitor
 const SELECT_CLASSES = `
@@ -43,5 +50,51 @@ export class ClassesService {
     }
 
     return toGymClass(result.rows[0]);
+  }
+
+  // POST /api/classes
+  async create(dto: CreateClassDto): Promise<GymClass> {
+    // 1. ¿Existe el monitor?
+    const trainer = await this.pool.query(
+      'SELECT id FROM trainers WHERE id = $1',
+      [dto.trainerId],
+    );
+    if (trainer.rows.length === 0) {
+      throw new BadRequestException(
+        'No existe ningún monitor con ese trainerId',
+      ); // → 400
+    }
+
+    // 2. Guardamos la clase. RETURNING nos da su id nuevo
+    const result = await this.pool.query<{ id: number }>(
+      `INSERT INTO classes (activity, room, starts_at, spots, trainer_id)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING id`,
+      [dto.activity, dto.room, dto.startsAt, dto.spots, dto.trainerId],
+    );
+
+    // 3. Devolvemos la clase completa, con el nombre del monitor
+    return this.findOne(result.rows[0].id);
+  }
+
+  // DELETE /api/classes/:id
+  async remove(id: number): Promise<GymClass> {
+    // 1. ¿Existe? findOne ya lanza el 404 si no
+    const gymClass = await this.findOne(id);
+
+    // 2. ¿Tiene reservas? COUNT llega como texto: ::int lo convierte en número
+    const bookings = await this.pool.query<{ total: number }>(
+      'SELECT COUNT(*)::int AS total FROM bookings WHERE class_id = $1',
+      [id],
+    );
+    if (bookings.rows[0].total > 0) {
+      throw new ConflictException(
+        `No se puede borrar: la clase tiene ${bookings.rows[0].total} reservas`,
+      ); // → 409
+    }
+
+    // 3. La borramos y devolvemos la clase que había
+    await this.pool.query('DELETE FROM classes WHERE id = $1', [id]);
+    return gymClass;
   }
 }
