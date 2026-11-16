@@ -33,3 +33,14 @@ Antes de guardar, comprobamos que el trainerId sea válido. Si no existe, devolv
 ## Pregunta 4
 
 Porque la petición es correcta, pero no se puede eliminar la clase porque todavía tiene reservas; 400 es para peticiones incorrectas
+
+
+## Pregunta 5
+
+Tiene el ID de Ana y las fechas de creación y caducidad. No incluimos el rol porque puede cambiar, así que lo consultamos en la base de datos en cada petición para tenerlo actualizado
+
+{
+  "sub": 1,
+  "iat": 1794843938,
+  "exp": 1794847538
+}
