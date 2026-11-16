@@ -18,3 +18,8 @@ GitHub no deja subir cambios a main sin una pull request y pasar los checks
 
 Si PostgreSQL está apagado, el cliente recibe un error 500 genérico, mientras que el error completo aparece en la terminal de NestJS. Así no se muestran detalles internos del servidor al usuario
 
+
+
+## Pregunta 2
+
+Con la versión mala aparecen las 7 clases porque el texto puede modificar la consulta y mostrar todos los resultados. Sin embargo, con $1, PostgreSQL no encuentra ninguna clase porque utiliza el valor como texto
