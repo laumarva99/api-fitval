@@ -44,3 +44,8 @@ Tiene el ID de Ana y las fechas de creación y caducidad. No incluimos el rol po
   "iat": 1794843938,
   "exp": 1794847538
 }
+
+
+## Pregunta 6
+
+Porque el token solo contiene el ID del usuario. Cada vez que hace una petición, se comprueba en la base de datos qué permisos tiene en ese momento y se actualiza automáticamente sin tener que iniciar sesión otra vez
