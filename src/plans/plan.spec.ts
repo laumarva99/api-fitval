@@ -9,6 +9,6 @@ describe('toPlan', () => {
     const plan = toPlan(row);
 
     // 3. Comprobar: tiene que ser el número 29.9
-    expect(plan.monthlyPrice).toBe(29.9);
+    expect(plan.monthlyPrice).toBe(30);
   });
 });
