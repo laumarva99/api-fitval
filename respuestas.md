@@ -55,3 +55,8 @@ Porque el token solo contiene el ID del usuario. Cada vez que hace una petición
 ## Pregunta 7
 
 Porque usamos uno falso que imita las respuestas de la base de datos. Pero no comprueba si las consultas están bien escritas; para eso usamos los tests de integración
+
+
+## Pregunta 8
+
+Porque genera un número diferente cada vez, por eso el correo siempre es distinto. Si usamos uno fijo al repetir el test daría un error porque ese usuario ya existiría
