@@ -29,3 +29,12 @@ export function toGymClass(row: GymClassRow): GymClass {
     trainerName: row.trainer_name,
   };
 }
+
+// Una página de clases (lo que devuelve la v2 de GET /classes)
+export interface GymClassPage {
+  data: GymClass[]; // las clases de esta página
+  total: number; // cuántas clases hay en total (con el filtro)
+  page: number; // página actual
+  limit: number; // clases por página
+  totalPages: number; // cuántas páginas hay
+}

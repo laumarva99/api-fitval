@@ -60,3 +60,9 @@ Porque usamos uno falso que imita las respuestas de la base de datos. Pero no co
 ## Pregunta 8
 
 Porque genera un número diferente cada vez, por eso el correo siempre es distinto. Si usamos uno fijo al repetir el test daría un error porque ese usuario ya existiría
+
+
+
+## Pregunta 9
+
+Porque lo que se pega en el ORDER BY nunca es el texto del cliente. El usuario solo puede ordenar las clases por tres opciones, si intenta utilizar otra opción el sistema rechaza la petición con un error 400 para evitar cambios
