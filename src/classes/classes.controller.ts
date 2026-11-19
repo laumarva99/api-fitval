@@ -8,12 +8,14 @@ import {
   Post,
   Query,
   UseGuards,
+  Version,
 } from '@nestjs/common';
 
 import { ClassesService } from './classes.service';
 import { CreateClassDto } from './dto/create-class.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { StaffGuard } from '../auth/staff.guard';
+import { ListClassesQueryDto } from './dto/list-classes-query.dto';
 
 @Controller('classes') // rutas /api/classes
 export class ClassesController {
@@ -27,6 +29,12 @@ export class ClassesController {
   @Get(':id') // GET /api/classes/:id
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.classesService.findOne(id);
+  }
+
+  @Get() // GET /api/v2/classes?page=...&limit=...&sort=...&order=...&activity=...
+  @Version('2')
+  findPage(@Query() query: ListClassesQueryDto) {
+    return this.classesService.findPage(query);
   }
 
   @Post() // POST /api/classes

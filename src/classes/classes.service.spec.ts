@@ -85,4 +85,22 @@ describe('ClassesService', () => {
       [1],
     ); // DELETE de la clase 1
   });
+
+  // Test unitario
+  it('findPage calcula el total y las páginas', async () => {
+    fakePool.query
+      .mockResolvedValueOnce({ rows: [spinningRow] }) // 1.ª: las clases de la página
+      .mockResolvedValueOnce({ rows: [{ total: 7 }] }); // 2.ª: el COUNT
+
+    const result = await service.findPage({
+      page: 1,
+      limit: 3,
+      sort: 'startsAt',
+      order: 'asc',
+    });
+
+    expect(result.data).toHaveLength(1);
+    expect(result.total).toBe(7);
+    expect(result.totalPages).toBe(3);
+  });
 });
