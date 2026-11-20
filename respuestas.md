@@ -66,3 +66,6 @@ Porque genera un número diferente cada vez, por eso el correo siempre es distin
 ## Pregunta 9
 
 Porque lo que se pega en el ORDER BY nunca es el texto del cliente. El usuario solo puede ordenar las clases por tres opciones, si intenta utilizar otra opción el sistema rechaza la petición con un error 400 para evitar cambios
+
+
+Porque nos aseguramos las limitaciones de intentos en el login y así evitar que alguien pruebe muchas contraseñas seguidas(ciberataques). Trust proxy indentifica la IP real de cada usuario en Render y evita que todos compartan el mismo límite de peticiones
