@@ -15,6 +15,8 @@ async function bootstrap() {
   app.set('trust proxy', 1);
 
   configureApp(app); // prefijo /api y ValidationPipe
+  // Archivos tal cual: las fotos en /uploads/...
+  app.useStaticAssets('uploads', { prefix: '/uploads' });
 
   await app.listen(process.env.PORT ?? 3000);
 }

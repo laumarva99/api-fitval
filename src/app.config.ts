@@ -10,7 +10,12 @@ import {
 // La configuración de la API. La usan main.ts y los tests de integración
 export function configureApp(app: INestApplication) {
   // Todas las rutas empiezan por /api
-  app.use(helmet()); // cabeceras de seguridad en todas las respuestas
+  app.use(
+    helmet({
+      // Deja que el frontend (otro origen) muestre las fotos de /uploads
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
+    }),
+  );
   app.setGlobalPrefix('api');
   // Todos los errores con la misma forma
   app.useGlobalFilters(new AllExceptionsFilter());
