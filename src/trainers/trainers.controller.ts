@@ -18,6 +18,7 @@ import { PhotosService } from './photos.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { StaffGuard } from '../auth/staff.guard';
 import { CreateTrainerDto } from './dto/create-trainer.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 // Las reglas de la imagen: como mucho 2 MB y solo PNG, JPG o WEBP
 const photoPipe = new ParseFilePipe({
@@ -30,6 +31,7 @@ const photoPipe = new ParseFilePipe({
   ],
 });
 
+@ApiTags('trainers') // en Swagger, agrupadas bajo "trainers"
 @Controller('trainers') // /api/v1/trainers
 export class TrainersController {
   constructor(
@@ -43,6 +45,7 @@ export class TrainersController {
   }
   @Post() // POST /api/v1/trainers → 201
   @UseGuards(AuthGuard, StaffGuard) // solo personal
+  @ApiBearerAuth() // en Swagger: esta ruta necesita token (sale un candado)
   create(@Body() dto: CreateTrainerDto) {
     return this.trainersService.create(dto);
   }
@@ -50,6 +53,7 @@ export class TrainersController {
   // POST /api/v1/trainers/1/photo → guarda la foto en uploads/
   @Post(':id/photo')
   @UseGuards(AuthGuard, StaffGuard) // solo personal
+  @ApiBearerAuth() // en Swagger: esta ruta necesita token (sale un candado)
   @UseInterceptors(FileInterceptor('photo')) // el campo del formulario se llama "photo"
   async uploadPhoto(
     @Param('id', ParseIntPipe) id: number,
