@@ -7,6 +7,6 @@ import { UsersModule } from '../users/users.module';
 @Module({
   imports: [DatabaseModule, UsersModule], // el Pool y el StaffGuard
   controllers: [TrainersController],
-  providers: [TrainersService]
+  providers: [TrainersService],
 })
-export class TrainersModule { }
+export class TrainersModule {}

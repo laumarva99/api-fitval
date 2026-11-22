@@ -135,4 +135,17 @@ describe('API de FitVal', () => {
 
     expect(response.headers['x-powered-by']).toBeUndefined();
   });
+
+  // Ejercicio 10.4
+  it('GET /api/v1/trainers/1 trae a Carla con sus especialidades', async () => {
+    const response = await request(app.getHttpServer()).get(
+      '/api/v1/trainers/1',
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('specialties', [
+      'Ciclo indoor',
+      'Fuerza',
+    ]);
+  });
 });
