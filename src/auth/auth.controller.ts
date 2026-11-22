@@ -15,7 +15,9 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import type { AuthRequest } from './jwt-payload';
 import { Throttle } from '@nestjs/throttler';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth') // en Swagger, agrupadas bajo "auth"
 @Controller('auth') // rutas /api/auth
 export class AuthController {
   constructor(
@@ -37,6 +39,7 @@ export class AuthController {
 
   @Get('me') // GET /api/auth/me
   @UseGuards(AuthGuard) // solo con un token válido
+  @ApiBearerAuth() // en Swagger: esta ruta necesita token (sale un candado)
   async me(@Req() request: AuthRequest) {
     const user = await this.usersService.findById(request.user.sub);
     if (!user) {
