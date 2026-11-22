@@ -76,3 +76,9 @@ Porque nos aseguramos las limitaciones de intentos en el login y así evitar que
 ## Pregunta 11
 
 Sin la transacción, Óscar se guardó junto con su especialidad 5, pero no se completó el registro porque la especialidad 99 no existe. La API devolvió un 400, pero sus datos se guardaron a medias. Din embargo, Nuria no recibe el ID 5 porque ya lo había utilizado en el intento anterior 
+
+
+
+## Pregunta 12
+
+La API responde, pero el navegador solo permite ver la respuesta a las webs autorizadas. Postman sí puede verla porque no tiene esa limitación. CORS sirve para controlar desde qué webs se puede acceder a la API

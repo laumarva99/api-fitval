@@ -16,6 +16,13 @@ export function configureApp(app: INestApplication) {
       crossOriginResourcePolicy: { policy: 'cross-origin' },
     }),
   );
+
+  // CORS: solo esta web puede usar la API desde el navegador.
+  // En Render, la dirección sale de la variable CORS_ORIGIN. En tu ordenador, la de Vite.
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
+  });
+
   app.setGlobalPrefix('api');
   // Todos los errores con la misma forma
   app.useGlobalFilters(new AllExceptionsFilter());
