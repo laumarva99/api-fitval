@@ -5,6 +5,13 @@ API del gimnasio **FitVal**: planes, clases, monitores y reservas, con registro,
 Está hecha con **NestJS** y **PostgreSQL**. Es la continuación de la entrega de SQL, donde diseñé la base de datos del gimnasio.
 Tiene comentadas las partes que se le añaden al proyecto para mejorar la comprensión y lectura del cógido del ejercicio.
 
+## API desplegada
+
+- API: https://api-fitval-laumarva.onrender.com/api/v1/health
+- Documentación (Swagger): https://api-fitval-laumarva.onrender.com/docs
+
+> Está en el plan gratuito de Render: si lleva un rato sin usarse, la primera petición puede tardar alrededor de un minuto.
+
 ## Tecnologías
 
 - Node.js 24

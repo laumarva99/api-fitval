@@ -82,3 +82,14 @@ Sin la transacción, Óscar se guardó junto con su especialidad 5, pero no se c
 ## Pregunta 12
 
 La API responde, pero el navegador solo permite ver la respuesta a las webs autorizadas. Postman sí puede verla porque no tiene esa limitación. CORS sirve para controlar desde qué webs se puede acceder a la API
+
+
+
+## Pregunta 13
+
+Ahora aparece "database": "postgres" porque Supabase utiliza ese nombre para su base de datos. No he tenido que cambiar el código, solo la variable DATABASE_URL para conectarme a Supabase en lugar de Docker
+
+
+## Pregunta 14
+
+La foto ha desaparecido porque Render borra los archivos guardados al hacer un nuevo despliegue. Sin embargo, el photoUrl sigue guardado en Supabase, pero apunta a una imagen que ya no existe. Las fotos deberían guardarse en Supabase Storage para que no se pierdan
