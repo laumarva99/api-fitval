@@ -4,6 +4,7 @@ export interface TrainerRow {
   name: string;
   email: string;
   specialty: string; // el nombre de una especialidad (s.name AS specialty)
+  photo_url: string | null; // NULL si no tiene foto
 }
 
 // Un monitor con sus especialidades dentro, como lo devuelve la API
@@ -12,6 +13,7 @@ export interface Trainer {
   name: string;
   email: string;
   specialties: string[];
+  photoUrl: string | null;
 }
 
 // Varias filas (una por especialidad) → un solo monitor con sus especialidades
@@ -21,5 +23,6 @@ export function toTrainer(rows: TrainerRow[]): Trainer {
     name: rows[0].name,
     email: rows[0].email,
     specialties: rows.map((row) => row.specialty),
+    photoUrl: rows[0].photo_url, // como el id: se repite en todas las filas
   };
 }

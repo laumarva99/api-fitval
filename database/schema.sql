@@ -30,6 +30,7 @@ CREATE TABLE trainers (
   dni VARCHAR(9) UNIQUE NOT NULL,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(150) UNIQUE NOT NULL
+  photo_url TEXT, -- dirección de la foto (NULL si no tiene)
 );
 
 CREATE TABLE classes (
