@@ -93,3 +93,9 @@ Ahora aparece "database": "postgres" porque Supabase utiliza ese nombre para su 
 ## Pregunta 14
 
 La foto ha desaparecido porque Render borra los archivos guardados al hacer un nuevo despliegue. Sin embargo, el photoUrl sigue guardado en Supabase, pero apunta a una imagen que ya no existe. Las fotos deberían guardarse en Supabase Storage para que no se pierdan
+
+
+
+## Pregunta 15
+
+La conexión directa no funciona porque Render usa IPv4 y Supabase solo ofrece IPv6. El Session pooler permite la conexión.En el 13.9 recibo un 401 porque el token se creó con el secreto antiguo. Cambiaría el secreto si se filtrara para evitar accesos no autorizados
