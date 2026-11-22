@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { TrainersModule } from './trainers/trainers.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     ClassesModule,
     UsersModule,
     AuthModule,
+    TrainersModule,
   ], // para que AppController pueda pedir el Pool
   controllers: [AppController],
   providers: [
